@@ -41,7 +41,7 @@ public class ModelMovie {
             
             String data[][] = new String[getBanyakData()][5];
             
-            String query = "Select * from movie_db"; 
+            String query = "Select * from movie"; 
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()){
                 data[jmlData][0] = resultSet.getString("judul");
@@ -67,7 +67,7 @@ public class ModelMovie {
      double fakting = Float.parseFloat(akting);
      double nilai = (falur + fpenokohan +fakting)/3;
         try {
-           String query = "Select * from movie_db WHERE judul = '" + judul + "' "; 
+           String query = "Select * from movie WHERE judul = '" + judul + "' "; 
            System.out.println(judul + " " + falur + " " + fpenokohan + " " + fakting + " " + nilai);
            ResultSet resultSet = statement.executeQuery(query);
            
@@ -76,7 +76,7 @@ public class ModelMovie {
             }
             
             if (jmlData == 0) {
-                query = "INSERT INTO movie_db VALUES('"+judul+"','"+falur+"','"+fpenokohan+"','"+fakting+"','"+nilai+"')";
+                query = "INSERT INTO movie VALUES('"+judul+"','"+falur+"','"+fpenokohan+"','"+fakting+"','"+nilai+"')";
            
                 statement = (Statement) koneksi.createStatement();
                 statement.executeUpdate(query);
@@ -101,7 +101,7 @@ public class ModelMovie {
         double fakting = Float.parseFloat(akting);
         double nilai = (falur + fpenokohan +fakting)/3; 
         try {
-           String query = "Select * from movie_db WHERE judul= '" + judul + "' "; 
+           String query = "Select * from movie WHERE judul= '" + judul + "' "; 
            ResultSet resultSet = statement.executeQuery(query);
            
            while (resultSet.next()){ 
@@ -109,7 +109,7 @@ public class ModelMovie {
             }
            
              if (jmlData == 1) {
-                query = "UPDATE movie_db SET alur='" + falur + "', penokohan='" + fpenokohan + "', nilai='" + nilai + "', akting = '" + akting +"' WHERE judul='" + judul +"'";
+                query = "UPDATE movie SET alur='" + falur + "', penokohan='" + fpenokohan + "', nilai='" + nilai + "', akting = '" + akting +"' WHERE judul='" + judul +"'";
                 statement = (Statement) koneksi.createStatement();
                 statement.executeUpdate(query); //execute querynya
                 System.out.println("Berhasil diupdate");
@@ -129,7 +129,7 @@ public int getBanyakData(){
         int jmlData = 0;
         try{
             statement = koneksi.createStatement();
-            String query = "Select * from movie_db";
+            String query = "Select * from movie";
             ResultSet resultSet = statement.executeQuery(query);
             while (resultSet.next()){ 
                 jmlData++;
@@ -145,7 +145,7 @@ public int getBanyakData(){
 
  public void deleteMovie (String judul) {
         try{
-            String query = "DELETE FROM movie_db WHERE judul = '"+judul+"'";
+            String query = "DELETE FROM movie WHERE judul = '"+judul+"'";
             statement = koneksi.createStatement();
             statement.executeUpdate(query);
             JOptionPane.showMessageDialog(null, "Berhasil Dihapus");
